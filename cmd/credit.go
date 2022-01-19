@@ -32,7 +32,7 @@ Usage: accountant credit <username> --amount=<amount> --details:<details>`,
 		if err != nil {
 			log.Fatal(err)
 		}
-		u.UpdateAmount(CreditAmount, CreditDetails)
+		u.Update(CreditAmount, CreditDetails)
 
 	},
 }

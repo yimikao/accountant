@@ -77,25 +77,19 @@ func AllUsers() ([]User, error) {
 	return users, nil
 }
 
-func (u *User) UpdateAmount(amount float64, details string) {
+func (u *User) Update(amount float64, details string) {
 	tx := Transaction{
-		Type:    ttype,
+		Type:    "credit",
 		Details: details,
 		Amount:  amount,
 	}
 	u.Transactions = append(u.Transactions, tx)
-
-	newuser := User{
-		Username:     u.Username,
-		Transactions: u.Transactions,
-	}
-
-	newuser.Balance = u.Balance + amount
+	u.Balance = u.Balance + amount
 
 	users, _ := getUsers()
 	for i, usr := range users {
-		if usr.Username == u.Username {
-			users[i] = newuser
+		if strings.EqualFold(u.Username, usr.Username) {
+			users[i] = *u
 		}
 	}
 	updateDB(users)
