@@ -1,1 +1,3 @@
-# accountant
+# accountant cli
+## Todo
+- Add authentication
